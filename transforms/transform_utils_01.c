@@ -6,7 +6,7 @@
 /*   By: gloras-t <gloras-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 05:14:01 by gloras-t          #+#    #+#             */
-/*   Updated: 2019/05/04 01:07:55 by gloras-t         ###   ########.fr       */
+/*   Updated: 2019/08/03 01:54:40 by gloras-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void	ft_transform_width(t_format *data)
 
 	length = ft_length_treat(data);
 	size = (data->width > length) ? data->width : length;
-	if ((data->width > length) && data->flag['0'])
+	if ((data->width > length) && data->flag['0']
+	&& ft_strcmp(data->value, "inf") && ft_strcmp(data->value, "INF"))
 	{
 		k = (length > size) ? 0 : size - length;
 		str = ft_fill_line(k, '0');

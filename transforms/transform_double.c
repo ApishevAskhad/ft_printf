@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transform_double.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gloras-t <gloras-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 05:26:32 by gloras-t          #+#    #+#             */
-/*   Updated: 2019/05/03 05:31:04 by gloras-t         ###   ########.fr       */
+/*   Updated: 2019/07/27 23:19:27 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		ft_round_double_check(char *dot, t_format *data)
 	if (*(dot - 1) == '.' && ((*dot > '9')
 			|| ((*dot > '5') && data->precision == 0)
 			|| (*dot == '5' && (ft_check_zeroes(dot + 1)
-			|| (*(dot - 1) % 2)))))
+			|| (*(dot - 2) % 2 && data->precision == 0)))))
 		return (1);
 	return (0);
 }
@@ -64,7 +64,8 @@ int		ft_round_double(t_format *data)
 		return (0);
 	dot = tmp + data->precision + 1;
 	if (*dot && (*dot > '5' ||
-		(*dot == '5' && (ft_check_zeroes(dot + 1) || (*(dot - 1) % 2)))))
+		(*dot == '5' && (ft_check_zeroes(dot + 1) || (*(dot - 1) == '.'
+		&& *(dot - 2) % 2) || (*(dot - 1) != '.' && *(dot - 1) % 2)))))
 	{
 		ft_round_to_border(&dot, &tmp, 1, '\0');
 		if (ft_round_double_check(dot, data))

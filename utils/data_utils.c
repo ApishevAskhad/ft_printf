@@ -6,7 +6,7 @@
 /*   By: gloras-t <gloras-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 12:29:02 by gloras-t          #+#    #+#             */
-/*   Updated: 2019/05/04 01:19:59 by gloras-t         ###   ########.fr       */
+/*   Updated: 2019/08/02 23:10:48 by gloras-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ t_format	*ft_init_data(va_list ap)
 	data->dot = 0;
 	data->null_term = 0;
 	data->arg_index = 1;
+	data->fd = 1;
 	data->cast->fp_offset = ap->fp_offset;
 	data->cast->gp_offset = ap->gp_offset;
 	data->cast->overflow_arg_area = ap->overflow_arg_area;

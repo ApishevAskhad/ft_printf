@@ -3,22 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils_01.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gloras-t <gloras-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 12:07:24 by gloras-t          #+#    #+#             */
-/*   Updated: 2019/05/03 05:53:52 by gloras-t         ###   ########.fr       */
+/*   Updated: 2019/08/03 03:06:48 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-const char	*ft_parse_digit(const char *fmt, int *number)
+const char	*ft_parse_digit(const char *fmt, int *number, int *context)
 {
 	*number = 0;
 	while (ft_isdigit(*fmt))
 	{
-		*number = *number * 10;
-		*number += (*fmt - '0');
+		if (*context == 0 && ((*number == 214748364 && *fmt >= '8') ||
+		*number > 214748364))
+		{
+			*context = 3;
+			*number = 0;
+		}
+		if (*context != 3)
+		{
+			*number = *number * 10;
+			*number += (*fmt - '0');
+		}
 		fmt++;
 	}
 	return (fmt);
@@ -45,10 +54,10 @@ va_list ap)
 
 	if (ft_isdigit(*fmt))
 	{
-		fmt = ft_parse_digit(fmt, &number);
+		fmt = ft_parse_digit(fmt, &number, context);
 		if (*fmt == '$')
 		{
-			data->arg_index += (number - 1);
+			data->arg_index = number;
 			ft_parse_format(data, ap);
 			fmt++;
 		}
@@ -76,7 +85,7 @@ int *context, va_list ap)
 		ft_asterisk_helper(&tmp, data, context, ap);
 		if (ft_isdigit(*fmt))
 		{
-			fmt = ft_parse_digit(fmt, &tmp);
+			fmt = ft_parse_digit(fmt, &tmp, context);
 			if (*fmt == '$')
 			{
 				ft_asterisk_helper(&tmp, data, context, ap);

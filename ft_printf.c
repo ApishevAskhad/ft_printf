@@ -6,7 +6,7 @@
 /*   By: gloras-t <gloras-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 21:38:11 by gloras-t          #+#    #+#             */
-/*   Updated: 2019/05/04 01:42:53 by gloras-t         ###   ########.fr       */
+/*   Updated: 2019/08/03 00:10:53 by gloras-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ const char	*ft_parse_procces(const char *fmt, t_format *data, va_list ap)
 	if (data->type != '\0')
 	{
 		ft_parse_format(data, ap);
-		if (data->type != '%')
+		if (data->type != '%' && data->type != 'f')
 			data->arg_index += 1;
 	}
 	fmt += len;
@@ -97,9 +97,10 @@ int			ft_printf(const char *restrict format, ...)
 			ft_data_output(line, data);
 		}
 	}
-	write(1, line->line, line->length);
+	write(data->fd, line->line, line->length);
 	va_end(ap);
 	free(data);
+	n = line->amount;
 	ft_free_line(line);
-	return (line->amount);
+	return (n);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_table.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gloras-t <gloras-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 21:31:04 by gloras-t          #+#    #+#             */
-/*   Updated: 2019/05/03 14:41:07 by slindgre         ###   ########.fr       */
+/*   Updated: 2019/08/03 01:57:45 by gloras-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	ft_init_table(t_table *table)
 	table[17] = ft_init_handler('p', ft_foo_ptr);
 	table[18] = ft_init_handler('b', ft_foo_int);
 	table[19] = ft_init_handler('B', ft_foo_int);
+	table[20] = ft_init_handler('_', ft_foo_fd);
 }
 
 void	ft_parse_format(t_format *data, va_list ap)

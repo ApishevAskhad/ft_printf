@@ -6,7 +6,7 @@
 /*   By: gloras-t <gloras-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 05:22:48 by gloras-t          #+#    #+#             */
-/*   Updated: 2019/05/04 00:44:21 by gloras-t         ###   ########.fr       */
+/*   Updated: 2019/08/03 02:18:25 by gloras-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,16 @@ void	ft_transform_prec_int(t_format *data)
 void	ft_transform_line(t_format *data)
 {
 	char	*tmp;
+	char	*str;
 
 	if (data->size[0] == 'l' && data->type == 's')
 		ft_strsub_utf(data);
 	else
 	{
-		tmp = ft_strdup(ft_strsub(data->value, 0, data->precision));
+		str = ft_strsub(data->value, 0, data->precision);
+		tmp = ft_strdup(str);
 		ft_update_value(&data->value, tmp);
+		free(str);
 	}
 }
 

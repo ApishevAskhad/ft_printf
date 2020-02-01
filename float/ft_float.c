@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_float.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gloras-t <gloras-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 21:46:13 by slindgre          #+#    #+#             */
-/*   Updated: 2019/05/03 15:28:45 by slindgre         ###   ########.fr       */
+/*   Updated: 2019/08/03 02:45:42 by gloras-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_check_inf(t_format *data, t_float fl)
 	}
 	else if (!fl.t_fl.expon && !fl.t_fl.mant)
 		res = ft_strdup("0.");
-	if (!(!ft_strcmp(res, "inf") || !ft_strcmp(res, "nan")))
+	if (ft_strcmp(res, "nan"))
 		data->sign = fl.t_fl.sign;
 	return (res);
 }
@@ -43,7 +43,7 @@ void	ft_foo_float_f(t_format *data, U128 expon, U128 fract, LL len)
 	tmp = ft_exp_to_str(expon, len);
 	ft_join_wrapper(&tmp, ft_strdup("."));
 	ft_join_wrapper(&tmp, ft_fract_to_str(fract, len));
-	data->value = tmp;
+	ft_update_value(&data->value, tmp);
 }
 
 void	ft_fage_capitalize(t_format *data)
@@ -72,7 +72,6 @@ void	ft_foo_float_fge(t_format *data, U128 expon, U128 fract, LL len)
 		ft_transform_exp(data);
 		if ((prec > elen && elen >= -4) || !ft_strcmp(data->value, "0."))
 		{
-			free(data->value);
 			ft_foo_float_f(data, expon, fract, len);
 			data->precision = prec - elen - 1;
 			free(data->exp);

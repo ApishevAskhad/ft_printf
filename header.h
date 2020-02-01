@@ -6,7 +6,7 @@
 /*   By: gloras-t <gloras-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 13:31:03 by slindgre          #+#    #+#             */
-/*   Updated: 2019/05/04 01:14:48 by gloras-t         ###   ########.fr       */
+/*   Updated: 2019/08/03 01:57:26 by gloras-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define DEF_PREC_A		15
 
 # define FLAGS			"-+ '#0"
-# define TYPES			"%aAbBdDiuUoOxXfFeEgGcCsSnp"
+# define TYPES			"_%aAbBdDiuUoOxXfFeEgGcCsSnp"
 # define TYPES_INTEGER	"bBdDiuUoOxX"
 # define DIGITS			"0123456789"
 # define SIZES			"hljzLH"
@@ -54,7 +54,7 @@
 # define COLOR_EOC		"\033[0m"
 
 # define BUF_SIZE		200
-# define TABLE_SIZE		20
+# define TABLE_SIZE		21
 # define FLAG_SIZE		49
 
 typedef struct			s_line
@@ -85,6 +85,7 @@ typedef struct			s_format
 	UI					dot;
 	UI					null_term;
 	UI					arg_index;
+	UI					fd;
 	t_cast				cast;
 	char				check_flag[CHAR_MAX];
 	char				check_types[CHAR_MAX];
@@ -138,7 +139,8 @@ void					ft_free_line(t_line *line);
 
 void					ft_prepare_parse(const char *fmt, t_format *data,
 						int *len);
-const char				*ft_parse_digit(const char *fmt, int *number);
+const char				*ft_parse_digit(const char *fmt, int *number,
+						int *context);
 const char				*ft_dot_treat(const char *fmt, t_format *data,
 						int *context);
 const char				*ft_digit_treat(const char *fmt, t_format *data,
@@ -260,6 +262,7 @@ void					ft_transform_exp(t_format *data);
 char					ft_get_char(int index, t_format *data, va_list ap);
 int						ft_check_in_line(char c, char *line);
 void					ft_print_bits(U128 n);
+void					ft_foo_fd(t_format *data, va_list ap);
 void					ft_foo_int(t_format *data, va_list ap);
 void					ft_foo_str(t_format *data, va_list ap);
 void					ft_foo_char(t_format *data, va_list ap);

@@ -6,7 +6,7 @@
 #    By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/01 12:49:11 by gloras-t          #+#    #+#              #
-#    Updated: 2019/05/03 14:37:27 by slindgre         ###   ########.fr        #
+#    Updated: 2019/07/27 23:35:27 by slindgre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,6 @@ SRC =	ft_printf.c \
 		$(TRANSFORMS)transform_exp.c	\
 		$(TRANSFORMS)transform_double.c
 
-#OBJ = $(SRC:.c=.o)
 OBJ = *.o
 
 all: $(NAME)

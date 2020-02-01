@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_handlers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gloras-t <gloras-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 20:16:12 by slindgre          #+#    #+#             */
-/*   Updated: 2019/05/03 15:14:30 by slindgre         ###   ########.fr       */
+/*   Updated: 2019/08/02 23:02:15 by gloras-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,9 @@ void	ft_remove_zeros(char *str)
 	}
 }
 
-void	ft_print_128_bits(U128 n)
+void	ft_foo_fd(t_format *data, va_list ap)
 {
-	int i;
-
-	i = 0;
-	while (i < 128)
-	{
-		write(1, (n & ((U128)1 << (127 - i))) ? "1" : "0", 1);
-		i++;
-		if (!(i % 4))
-			write(1, " ", 1);
-	}
-	write(1, "\n", 1);
+	data->fd = va_arg(ap, int);
 }
 
 char	*ft_strrev(char *str, int len)
